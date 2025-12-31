@@ -6,7 +6,7 @@ pip install -r requirements.txt
 
 # Start the Foundry server in the background
 echo "🚀 Starting Foundry server..."
-python server.py &
+python3 server.py &
 
 # Save the server's PID
 SERVER_PID=$!
