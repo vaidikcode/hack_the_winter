@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
 
 function Postmaker() {
   const location = useLocation()
+  const navigate = useNavigate()
   const { contentData: stateContentData, generatedAssets: stateGeneratedAssets } = location.state || {}
   let contentData = stateContentData
   let generatedAssets = stateGeneratedAssets
@@ -69,7 +71,21 @@ function Postmaker() {
   )
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen w-full py-10 px-4 md:px-10">
+    <div className="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen w-full py-10 px-4 md:px-10 relative">
+      {/* Back button */}
+      <div className="absolute top-6 left-6 z-50">
+        <button
+          onClick={() => navigate("/")}
+          title="Back to Home"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 shadow-lg hover:shadow-xl transition-all border border-slate-600 group"
+        >
+          <ArrowLeft className="w-5 h-5 text-slate-200 group-hover:text-white transition-colors" />
+          <span className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors">
+            Back
+          </span>
+        </button>
+      </div>
+      
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-6 p-6 max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold text-white mb-6">Generate and automate Instagram & Twitter posts</h2>
         

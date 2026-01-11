@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import AnimatedBackground from "../components/AnimatedBackground";
 import PromptInput from "../components/PromptInput";
 import React from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Index = () => {
@@ -88,6 +88,18 @@ const Index = () => {
     <div className="relative min-h-screen w-full overflow-hidden bg-white dark:bg-slate-950">
       <AnimatedBackground theme={theme} />
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-20">
+        {/* Back button */}
+        <div className="absolute top-6 left-6 z-20">
+          <button
+            onClick={() => navigate("/")}
+            title="Back to Home"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/80 dark:bg-slate-900/80 hover:opacity-95 transition-smooth border border-slate-200 dark:border-slate-700"
+          >
+            <ArrowLeft className="w-5 h-5 text-slate-700 dark:text-slate-200" />
+           
+          </button>
+        </div>
+
         {/* Theme toggle */}
         <div className="absolute top-6 right-6 z-20">
           <button

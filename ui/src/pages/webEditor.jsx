@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
 import Button from '../components/Button'
 
 export default function WebEditor(){
   const loc = useLocation()
+  const navigate = useNavigate()
   const [html, setHtml] = useState('<!-- Paste landing page HTML here -->')
   const [deploying, setDeploying] = useState(false)
   const [deploymentUrl, setDeploymentUrl] = useState(null)
@@ -74,6 +76,20 @@ export default function WebEditor(){
 
   return (
     <div className="min-h-screen w-full" style={{ background: 'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%)' }}>
+      {/* Back button */}
+      <div className="absolute top-6 left-6 z-50">
+        <button
+          onClick={() => navigate("/")}
+          title="Back to Home"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/90 hover:bg-white shadow-lg hover:shadow-xl transition-all border border-slate-200 group"
+        >
+          <ArrowLeft className="w-5 h-5 text-slate-700 group-hover:text-purple-600 transition-colors" />
+          <span className="text-sm font-medium text-slate-700 group-hover:text-purple-600 transition-colors">
+            Back
+          </span>
+        </button>
+      </div>
+      
       <div className="max-w-[1100px] mx-auto px-5 py-6">
         <div className="pt-12">
           <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Urbanist, sans-serif' }}>Web Editor</h1>
