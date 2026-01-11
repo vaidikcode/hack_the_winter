@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
 
 export default function Breakdown() {
   const location = useLocation()
+  const navigate = useNavigate()
   const { brdUrl: stateBrdUrl, strategyMarkdown: stateStrategyMarkdown } = location.state || {}
   const [brdUrl, setBrdUrl] = useState(stateBrdUrl || null)
   const [strategyMarkdown, setStrategyMarkdown] = useState(stateStrategyMarkdown || null)
@@ -118,7 +120,21 @@ export default function Breakdown() {
   const strategySections = parseStrategy(strategyMarkdown)
 
   return (
-    <div className="min-h-screen w-full bg-white py-12 px-4">
+    <div className="min-h-screen w-full bg-white py-12 px-4 relative">
+      {/* Back button */}
+      <div className="absolute top-6 left-6 z-50">
+        <button
+          onClick={() => navigate("/")}
+          title="Back to Home"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-gray-50 shadow-lg hover:shadow-xl transition-all border border-gray-200 group"
+        >
+          <ArrowLeft className="w-5 h-5 text-gray-700 group-hover:text-purple-600 transition-colors" />
+          <span className="text-sm font-medium text-gray-700 group-hover:text-purple-600 transition-colors">
+            Back
+          </span>
+        </button>
+      </div>
+      
       <style>{`
         .timeline {
           padding: 30px 0;

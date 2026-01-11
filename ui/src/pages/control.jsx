@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import Button from "../components/Button";
 
 export default function Control() {
+  const navigate = useNavigate();
+  
   // Product Pitch Logic
   const [productName, setProductName] = useState("");
   const [productUrl, setProductUrl] = useState("");
@@ -10,6 +15,7 @@ export default function Control() {
   const [pitchError, setPitchError] = useState("");
   const [copied, setCopied] = useState(false);
   const [showPitchModal, setShowPitchModal] = useState(false);
+  const [scanAnimation, setScanAnimation] = useState(false);
 
   // Dialer Logic
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -22,8 +28,10 @@ export default function Control() {
   const [vapiEvents, setVapiEvents] = useState([]);
   const [callActive, setCallActive] = useState(false);
   const vapiRef = useRef(null);
+  const vapiButtonContainerRef = useRef(null);
   const [transcript, setTranscript] = useState("");
   const [currentCallId, setCurrentCallId] = useState(null);
+  const [vapiButtonVisible, setVapiButtonVisible] = useState(false);
 
   // Load Vapi SDK script (original logic)
   // Environment variable pre-check
@@ -397,6 +405,20 @@ export default function Control() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-50 via-purple-50 to-pink-50">
+      {/* Back button */}
+      <div className="absolute top-6 left-6 z-50">
+        <button
+          onClick={() => navigate("/")}
+          title="Back to Home"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/90 hover:bg-white shadow-lg hover:shadow-xl transition-all border border-slate-200 group"
+        >
+          <ArrowLeft className="w-5 h-5 text-slate-700 group-hover:text-purple-600 transition-colors" />
+          <span className="text-sm font-medium text-slate-700 group-hover:text-purple-600 transition-colors">
+            Back
+          </span>
+        </button>
+      </div>
+      
       {/* Style Vapi's button to match our custom button */}
       <style>{`
         #vapi-support-btn{
